@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Menu from "./Menu";
 
 const Book = ({ title, authors, thumbnail }) =>
@@ -21,5 +22,11 @@ const Book = ({ title, authors, thumbnail }) =>
       {authors.join(",")}
     </div>
   </div>;
+
+Book.propTypes = {
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.array.isRequired,
+  thumbnail: PropTypes.string.isRequired
+};
 
 export default Book;
