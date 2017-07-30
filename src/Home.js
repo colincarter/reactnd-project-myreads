@@ -55,6 +55,10 @@ class Home extends React.Component {
     ]
   };
 
+  search = () => {
+    this.props.history.push("/search");
+  };
+
   render() {
     return (
       <div className="list-books">
@@ -72,9 +76,7 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="open-search">
-          <a onClick={() => this.setState({ showSearchPage: true })}>
-            Add a book
-          </a>
+          <a onClick={this.search}>Add a book</a>
         </div>
       </div>
     );
