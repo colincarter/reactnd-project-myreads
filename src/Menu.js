@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 class Menu extends React.Component {
   onChange = e => {
-    if (e.target.value !== this.props.shelfName) {
-      this.props.moveBook(this.props.shelfName, e.target.value);
-    }
+    this.props.moveBook(this.props.shelfName, e.target.value);
   };
 
   render() {
