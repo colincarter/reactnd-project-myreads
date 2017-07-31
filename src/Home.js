@@ -57,6 +57,8 @@ class Home extends React.Component {
     this.props.history.push("/search");
   };
 
+  moveBook = (from, to) => {};
+
   render() {
     return (
       <div className="list-books">
@@ -69,12 +71,19 @@ class Home extends React.Component {
               title="Currently Reading"
               shelfName="currentlyReading"
               books={this.state.currentlyReading}
+              moveBook={this.moveBook}
             />
-            <Bookshelf title="Read" shelfName="read" books={this.state.read} />
+            <Bookshelf
+              title="Read"
+              shelfName="read"
+              books={this.state.read}
+              moveBook={this.moveBook}
+            />
             <Bookshelf
               title="Want to Read"
               shelfName="wantToRead"
               books={this.state.wantToRead}
+              moveBook={this.moveBook}
             />
           </div>
         </div>

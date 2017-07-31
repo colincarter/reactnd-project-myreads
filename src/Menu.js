@@ -1,26 +1,33 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Menu = ({ shelfName }) => {
-  const options = [
-    { value: "none", html: "Move to..." },
-    { value: "currentlyReading", html: "Currently Reading" },
-    { value: "wantToRead", html: "Want to Read" },
-    { value: "read", html: "Read" },
-    { value: "none", html: "None" }
-  ];
+class Menu extends React.Component {
+  onChange = e => {
+    if (e.target.value !== this.props.shelfName) {
+      this.props.moveBook(this.props.shelfName, e.target.value);
+    }
+  };
 
-  return (
-    <div className="book-shelf-changer">
-      <select defaultValue={shelfName}>
-        {options.map((option, index) =>
-          <option value={option.value} key={index}>
-            {option.html}
+  render() {
+    return (
+      <div className="book-shelf-changer">
+        <select defaultValue={this.props.shelfName} onChange={this.onChange}>
+          <option value="none" disabled>
+            Move to...
           </option>
-        )}
-        >
-      </select>
-    </div>
-  );
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
+          <option value="read">Read</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+    );
+  }
+}
+
+Menu.propTypes = {
+  shelfName: PropTypes.string.isRequired,
+  moveBook: PropTypes.func.isRequired
 };
 
 export default Menu;
