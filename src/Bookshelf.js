@@ -10,8 +10,8 @@ const Bookshelf = ({ title, books, shelfName }) =>
     <div className="bookshelf-books">
       <ol className="books-grid">
         {books.length > 0 &&
-          books.map(book =>
-            <li>
+          books.map((book, index) =>
+            <li key={`${shelfName}-${index}`}>
               <Book
                 title={book.title}
                 authors={book.authors}
