@@ -1,6 +1,4 @@
 import React from "react";
-import Menu from "./Menu";
-import Book from "./Book";
 import Bookshelf from "./Bookshelf";
 
 class Home extends React.Component {
