@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Book from "./Book";
 
-const Bookshelf = ({ title, books }) =>
+const Bookshelf = ({ title, books, shelfName }) =>
   <div className="bookshelf">
     <h2 className="bookshelf-title">
       {title}
@@ -16,6 +16,7 @@ const Bookshelf = ({ title, books }) =>
                 title={book.title}
                 authors={book.authors}
                 thumbnail={book.thumbnail}
+                shelfName={shelfName}
               />
             </li>
           )}

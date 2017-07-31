@@ -67,10 +67,15 @@ class Home extends React.Component {
           <div>
             <Bookshelf
               title="Currently Reading"
+              shelfName="currentlyReading"
               books={this.state.currentlyReading}
             />
-            <Bookshelf title="Read" books={this.state.read} />
-            <Bookshelf title="Want to Read" books={this.state.wantToRead} />
+            <Bookshelf title="Read" shelfName="read" books={this.state.read} />
+            <Bookshelf
+              title="Want to Read"
+              shelfName="wantToRead"
+              books={this.state.wantToRead}
+            />
           </div>
         </div>
         <div className="open-search">
