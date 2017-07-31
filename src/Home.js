@@ -58,7 +58,12 @@ class Home extends React.Component {
   };
 
   moveBookOnShelf = (book, from, to) => {
-    console.log({ book, from, to });
+    this.setState(state => {
+      return {
+        [from]: state[from].filter(books => books.title !== book.title),
+        [to]: [...state[to], book]
+      };
+    });
   };
 
   render() {

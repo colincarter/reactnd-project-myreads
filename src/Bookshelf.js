@@ -13,9 +13,7 @@ const Bookshelf = ({ title, books, shelfName, moveBookOnShelf }) =>
           books.map((book, index) =>
             <li key={`${shelfName}-${index}`}>
               <Book
-                title={book.title}
-                authors={book.authors}
-                thumbnail={book.thumbnail}
+                book={book}
                 shelfName={shelfName}
                 moveBookOnShelf={moveBookOnShelf}
               />

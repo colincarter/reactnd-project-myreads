@@ -4,13 +4,13 @@ import Menu from "./Menu";
 
 class Book extends React.Component {
   moveBook = (fromShelf, toShelf) => {
-    if (fromShelf !== toShelf) {
-      this.props.moveBookOnShelf(this.props.title, fromShelf, toShelf);
+    if (fromShelf !== toShelf && toShelf !== "none") {
+      this.props.moveBookOnShelf(this.props.book, fromShelf, toShelf);
     }
   };
 
   render() {
-    const { title, authors, thumbnail, shelfName } = this.props;
+    const { book, shelfName } = this.props;
 
     return (
       <div className="book">
@@ -20,16 +20,16 @@ class Book extends React.Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url("${thumbnail}")`
+              backgroundImage: `url("${book.thumbnail}")`
             }}
           />
           <Menu shelfName={shelfName} moveBook={this.moveBook} />
         </div>
         <div className="book-title">
-          {title}
+          {book.title}
         </div>
         <div className="book-authors">
-          {authors.join(",")}
+          {book.authors.join(",")}
         </div>
       </div>
     );
@@ -37,9 +37,7 @@ class Book extends React.Component {
 }
 
 Book.propTypes = {
-  title: PropTypes.string.isRequired,
-  authors: PropTypes.array.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  book: PropTypes.object.isRequired,
   moveBookOnShelf: PropTypes.func.isRequired
 };
 
