@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Menu from "./Menu";
 
-const Book = ({ title, authors, thumbnail }) =>
+const Book = ({ title, authors, thumbnail, shelfName }) =>
   <div className="book">
     <div className="book-top">
       <div
@@ -13,7 +13,7 @@ const Book = ({ title, authors, thumbnail }) =>
           backgroundImage: `url("${thumbnail}")`
         }}
       />
-      <Menu />
+      <Menu shelfName={shelfName} />
     </div>
     <div className="book-title">
       {title}

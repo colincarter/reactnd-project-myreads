@@ -8,16 +8,12 @@ const Menu = ({ shelfName }) => {
     { value: "read", html: "Read" },
     { value: "none", html: "None" }
   ];
-  console.log(shelfName);
+
   return (
     <div className="book-shelf-changer">
-      <select>
+      <select defaultValue={shelfName}>
         {options.map((option, index) =>
-          <option
-            value={option.value}
-            defaultValue={shelfName === option.value}
-            key={index}
-          >
+          <option value={option.value} key={index}>
             {option.html}
           </option>
         )}
