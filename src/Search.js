@@ -25,7 +25,7 @@ const Search = ({ history }) =>
   </div>;
 
 Search.propTypes = {
-  history: PropTypes.array.isRequired
+  history: PropTypes.object.isRequired
 };
 
 export default Search;
