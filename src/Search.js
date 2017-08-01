@@ -7,30 +7,42 @@ import Book from "./Book";
 class Search extends React.Component {
   state = { books: [], query: "" };
 
-  async componentDidMount() {
-    const books = await BooksAPI.getAll();
-    console.log(books);
-    this.setState({ books: books });
-  }
+  // async componentDidMount() {
+  //   const books = await BooksAPI.getAll();
+  //   console.log(books);
+  //   this.setState({ books: books });
+  // }
 
   onChange = event => {
-    this.setState({
-      query: event.target.value
-    });
+    const query = event.target.value;
+    console.log(query.length);
+    if (query.length > 0) {
+      BooksAPI.search(query).then(books => {
+        if (books && !books.error) {
+          this.setState({ books, query });
+        }
+      });
+    } else {
+      this.setState({ books: [], query: "" });
+    }
   };
 
   moveBookOnShelf = () => {};
 
-  renderBook = rawBook => {
+  renderBook = (rawBook, index) => {
     const book = {
       title: rawBook.title,
-      authors: rawBook.authors,
-      thumbnail: rawBook.imageLinks.thumbnail
+      authors: rawBook.authors || "",
+      thumbnail: rawBook.imageLinks ? rawBook.imageLinks.thumbnail : ""
     };
 
     return (
-      <li>
-        <Book book={book} moveBookOnShelf={this.moveBookOnShelf} />
+      <li key={index}>
+        <Book
+          book={book}
+          moveBookOnShelf={this.moveBookOnShelf}
+          shelfName={rawBook.shelf}
+        />
       </li>
     );
   };
@@ -74,7 +86,7 @@ class Search extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {matchedBooks.map(book => this.renderBook(book))}
+            {matchedBooks.map((book, index) => this.renderBook(book, index))}
           </ol>
         </div>
       </div>

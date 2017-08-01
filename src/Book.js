@@ -29,7 +29,9 @@ class Book extends React.Component {
           {book.title}
         </div>
         <div className="book-authors">
-          {book.authors.join(",")}
+          {typeof book.authors === Array
+            ? book.authors.join(",")
+            : book.authors}
         </div>
       </div>
     );
@@ -38,6 +40,7 @@ class Book extends React.Component {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
+  shelfName: PropTypes.string.isRequired,
   moveBookOnShelf: PropTypes.func.isRequired
 };
 
