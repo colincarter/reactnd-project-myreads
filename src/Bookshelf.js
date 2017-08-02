@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Book from "./Book";
 
-const Bookshelf = ({ title, books, shelfName, moveBookOnShelf }) =>
+const Bookshelf = ({ title, books, shelfName, moveBookToShelf }) =>
   <div className="bookshelf">
     <h2 className="bookshelf-title">
       {title}
@@ -15,7 +15,7 @@ const Bookshelf = ({ title, books, shelfName, moveBookOnShelf }) =>
               <Book
                 book={book}
                 shelfName={shelfName}
-                moveBookOnShelf={moveBookOnShelf}
+                moveBookToShelf={moveBookToShelf}
               />
             </li>
           )}
@@ -27,7 +27,7 @@ Bookshelf.propTypes = {
   title: PropTypes.string.isRequired,
   books: PropTypes.array.isRequired,
   shelfName: PropTypes.string.isRequired,
-  moveBookOnShelf: PropTypes.func.isRequired
+  moveBookToShelf: PropTypes.func.isRequired
 };
 
 export default Bookshelf;

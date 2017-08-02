@@ -36,7 +36,9 @@ class Search extends React.Component {
     }
   };
 
-  moveBookOnShelf = () => {};
+  moveBookToShelf = (book, fromShelf, toShelf) => {
+    this.props.moveBookToShelf(book, fromShelf, toShelf);
+  };
 
   renderBook = (rawBook, index) => {
     const book = {
@@ -45,11 +47,13 @@ class Search extends React.Component {
       thumbnail: rawBook.imageLinks ? rawBook.imageLinks.thumbnail : ""
     };
 
+    console.log(rawBook.shelf);
+
     return (
       <li key={index}>
         <Book
           book={book}
-          moveBookOnShelf={this.moveBookOnShelf}
+          moveBookToShelf={this.moveBookToShelf}
           shelfName={rawBook.shelf}
         />
       </li>
@@ -88,7 +92,8 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  moveBookToShelf: PropTypes.func.isRequired
 };
 
 export default Search;

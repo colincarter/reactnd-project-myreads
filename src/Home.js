@@ -21,19 +21,19 @@ class Home extends React.Component {
               title="Currently Reading"
               shelfName="currentlyReading"
               books={currentlyReading}
-              moveBookOnShelf={moveBookToShelf}
+              moveBookToShelf={moveBookToShelf}
             />
             <Bookshelf
               title="Read"
               shelfName="read"
               books={read}
-              moveBookOnShelf={moveBookToShelf}
+              moveBookToShelf={moveBookToShelf}
             />
             <Bookshelf
               title="Want to Read"
               shelfName="wantToRead"
               books={wantToRead}
-              moveBookOnShelf={moveBookToShelf}
+              moveBookToShelf={moveBookToShelf}
             />
           </div>
         </div>
