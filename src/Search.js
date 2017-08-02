@@ -1,28 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
-import escapeRegExp from "escape-string-regexp";
+import { debounce } from "lodash";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 
 class Search extends React.Component {
-  state = { books: [], query: "" };
+  constructor() {
+    super();
+    this.state = { books: [], query: "" };
+    this.requestID = null;
+  }
 
-  // async componentDidMount() {
-  //   const books = await BooksAPI.getAll();
-  //   console.log(books);
-  //   this.setState({ books: books });
-  // }
+  queryAPI = query => {
+    BooksAPI.search(query).then(books => {
+      if (books && !books.error) {
+        this.setState({ books, query });
+      }
+    });
+  };
 
   onChange = event => {
     const query = event.target.value;
-    console.log(query.length);
+
     if (query.length > 0) {
-      BooksAPI.search(query).then(books => {
-        if (books && !books.error) {
-          this.setState({ books, query });
-        }
-      });
+      this.debounced = debounce(() => this.queryAPI(query), 500);
+      this.debounced();
     } else {
+      this.debounced.cancel();
       this.setState({ books: [], query: "" });
     }
   };
@@ -48,15 +52,10 @@ class Search extends React.Component {
   };
 
   render() {
-    const { query, books } = this.state;
+    let { books, query } = this.state;
 
-    let matchedBooks = books;
-
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), "i");
-      matchedBooks = books.filter(
-        book => match.test(book.title) || match.test(book.authors.join(" "))
-      );
+    if (query === "") {
+      books = [];
     }
 
     return (
@@ -86,7 +85,7 @@ class Search extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {matchedBooks.map((book, index) => this.renderBook(book, index))}
+            {books.map((book, index) => this.renderBook(book, index))}
           </ol>
         </div>
       </div>
