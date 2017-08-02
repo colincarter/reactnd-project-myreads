@@ -1,13 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
+import Spinner from "react-spinkit";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
+
+const spinnerStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)"
+};
 
 class Search extends React.Component {
   constructor() {
     super();
-    this.state = { books: [], query: "" };
+    this.state = { books: [], query: "", isLoading: false };
   }
 
   componentDidMount = () => {
@@ -16,6 +24,8 @@ class Search extends React.Component {
 
   queryAPI = query => {
     BooksAPI.search(query).then(books => {
+      this.setState({ isLoading: false });
+
       if (books && !books.error) {
         if (this.searchInput.value !== "") {
           this.setState({ books, query });
@@ -28,11 +38,12 @@ class Search extends React.Component {
     const query = event.target.value;
 
     if (query.length) {
-      this.debounced = debounce(() => this.queryAPI(query), 500);
+      this.setState({ isLoading: true });
+      this.debounced = debounce(() => this.queryAPI(query), 150);
       this.debounced();
     } else {
       this.debounced.cancel();
-      this.setState({ books: [], query: "" });
+      this.setState({ books: [], query: "", isLoading: false });
     }
   };
 
@@ -47,8 +58,6 @@ class Search extends React.Component {
       thumbnail: rawBook.imageLinks ? rawBook.imageLinks.thumbnail : ""
     };
 
-    console.log(rawBook.shelf);
-
     return (
       <li key={index}>
         <Book
@@ -60,8 +69,12 @@ class Search extends React.Component {
     );
   };
 
+  renderSpinner = () => {
+    return <Spinner name="three-bounce" fadeIn="half" style={spinnerStyle} />;
+  };
+
   render() {
-    let { books } = this.state;
+    let { books, isLoading } = this.state;
 
     return (
       <div className="search-books">
@@ -82,6 +95,8 @@ class Search extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
+          {isLoading && this.renderSpinner()}
+
           <ol className="books-grid">
             {books.map((book, index) => this.renderBook(book, index))}
           </ol>
