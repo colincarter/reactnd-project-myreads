@@ -4,7 +4,7 @@ import Menu from "./Menu";
 
 class Book extends React.Component {
   moveBook = (fromShelf, toShelf) => {
-    if (fromShelf !== toShelf && toShelf !== "none") {
+    if (fromShelf !== toShelf) {
       this.props.moveBookToShelf(this.props.book, fromShelf, toShelf);
     }
   };
