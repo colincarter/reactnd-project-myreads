@@ -27,7 +27,7 @@ class Search extends React.Component {
   onChange = event => {
     const query = event.target.value;
 
-    if (query.length > 0) {
+    if (query.length) {
       this.debounced = debounce(() => this.queryAPI(query), 500);
       this.debounced();
     } else {

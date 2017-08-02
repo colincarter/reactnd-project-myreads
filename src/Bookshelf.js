@@ -9,7 +9,7 @@ const Bookshelf = ({ title, books, shelfName, moveBookToShelf }) =>
     </h2>
     <div className="bookshelf-books">
       <ol className="books-grid">
-        {books.length > 0 &&
+        {books.length &&
           books.map((book, index) =>
             <li key={`${shelfName}-${index}`}>
               <Book
