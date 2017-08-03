@@ -24,16 +24,19 @@ class BooksApp extends React.Component {
     });
   };
 
-  moveBookToShelf = async (book, from, to) => {
-    this.setState(state => {
-      return {
-        [from]: state[from].filter(books => books.id !== book.id),
-        [to]: [...state[to], book],
-        isLoading: false
-      };
-    });
-
-    await update(book, to);
+  moveBookToShelf = (book, from, to) => {
+    this.setState(
+      state => {
+        return {
+          [from]: state[from].filter(books => books.id !== book.id),
+          [to]: [...state[to], book],
+          isLoading: false
+        };
+      },
+      async () => {
+        await update(book, to);
+      }
+    );
   };
 
   renderHome = props =>
