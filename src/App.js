@@ -25,9 +25,6 @@ class BooksApp extends React.Component {
   };
 
   moveBookToShelf = async (book, from, to) => {
-    await update(book, "none");
-    await update(book, to);
-
     this.setState(state => {
       return {
         [from]: state[from].filter(books => books.id !== book.id),
@@ -35,6 +32,8 @@ class BooksApp extends React.Component {
         isLoading: false
       };
     });
+
+    await update(book, to);
   };
 
   renderHome = props =>
