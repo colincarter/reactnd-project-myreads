@@ -2,16 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import Spinner from "react-spinkit";
+import { spinnerStyle } from "./util";
 import * as BooksAPI from "./BooksAPI";
 import { rawBookToBook } from "./util";
 import Book from "./Book";
-
-const spinnerStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%,-50%)"
-};
 
 class Search extends React.Component {
   constructor() {

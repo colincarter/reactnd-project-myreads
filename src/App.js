@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { getAll } from "./BooksAPI";
+import { getAll, update } from "./BooksAPI";
 import Search from "./Search";
 import Home from "./Home";
 import { rawBookToBook } from "./util";
@@ -11,21 +11,28 @@ class BooksApp extends React.Component {
     read: [],
     none: [],
     wantToRead: [],
-    currentlyReading: []
+    currentlyReading: [],
+    isLoading: false
   };
 
   componentDidMount = async () => {
+    this.setState({ isLoading: true });
     const books = await getAll();
+
     books.forEach(book => {
       this.moveBookToShelf(rawBookToBook(book), "none", book.shelf);
     });
   };
 
-  moveBookToShelf = (book, from, to) => {
+  moveBookToShelf = async (book, from, to) => {
+    await update(book, "none");
+    await update(book, to);
+
     this.setState(state => {
       return {
         [from]: state[from].filter(books => books.id !== book.id),
-        [to]: [...state[to], book]
+        [to]: [...state[to], book],
+        isLoading: false
       };
     });
   };
