@@ -1,10 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { getAll } from "./BooksAPI";
 import Search from "./Search";
 import Home from "./Home";
+import { rawBookToBook } from "./util";
 import "./App.css";
 
 class BooksApp extends React.Component {
+  /*
   state = {
     wantToRead: [
       {
@@ -56,11 +59,25 @@ class BooksApp extends React.Component {
     ],
     none: []
   };
+*/
+  state = {
+    read: [],
+    none: [],
+    wantToRead: [],
+    currentlyReading: []
+  };
+
+  componentDidMount = async () => {
+    const books = await getAll();
+    books.forEach(book => {
+      this.moveBookToShelf(rawBookToBook(book), "none", book.shelf);
+    });
+  };
 
   moveBookToShelf = (book, from, to) => {
     this.setState(state => {
       return {
-        [from]: state[from].filter(books => books.title !== book.title),
+        [from]: state[from].filter(books => books.id !== book.id),
         [to]: [...state[to], book]
       };
     });
