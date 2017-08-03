@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import Spinner from "react-spinkit";
 import * as BooksAPI from "./BooksAPI";
+import { rawBookToBook } from "./util";
 import Book from "./Book";
 
 const spinnerStyle = {
@@ -52,11 +53,7 @@ class Search extends React.Component {
   };
 
   renderBook = (rawBook, index) => {
-    const book = {
-      title: rawBook.title,
-      authors: rawBook.authors || "",
-      thumbnail: rawBook.imageLinks ? rawBook.imageLinks.thumbnail : ""
-    };
+    const book = rawBookToBook(rawBook);
 
     return (
       <li key={index}>
