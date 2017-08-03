@@ -22,16 +22,16 @@ class Search extends React.Component {
     this.searchInput.focus();
   };
 
-  queryAPI = query => {
-    BooksAPI.search(query).then(books => {
-      this.setState({ isLoading: false });
+  queryAPI = async query => {
+    const books = await BooksAPI.search(query);
 
-      if (books && !books.error) {
-        if (this.searchInput.value !== "") {
-          this.setState({ books, query });
-        }
+    this.setState({ isLoading: false });
+
+    if (books && !books.error) {
+      if (this.searchInput.value !== "") {
+        this.setState({ books, query });
       }
-    });
+    }
   };
 
   onChange = event => {
