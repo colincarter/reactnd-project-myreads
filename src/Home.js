@@ -17,6 +17,7 @@ class Home extends React.Component {
 
   renderBookShelves = () => {
     const { moveBookToShelf, currentlyReading, read, wantToRead } = this.props;
+
     return (
       <div>
         <Bookshelf
@@ -40,6 +41,7 @@ class Home extends React.Component {
       </div>
     );
   };
+
   render() {
     return (
       <div className="list-books">
