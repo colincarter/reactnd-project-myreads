@@ -8,10 +8,7 @@ import { rawBookToBook } from "./util";
 import Book from "./Book";
 
 class Search extends React.Component {
-  constructor() {
-    super();
-    this.state = { books: [], query: "", isLoading: false };
-  }
+  state = { books: [], query: "", isLoading: false };
 
   componentDidMount = () => {
     this.searchInput.focus();
