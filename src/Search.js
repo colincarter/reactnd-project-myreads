@@ -7,7 +7,7 @@ import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 
 class Search extends React.Component {
-  state = { books: [], query: "", isLoading: false };
+  state = { books: [], isLoading: false };
 
   componentDidMount = () => {
     this.searchInput.focus();
@@ -26,7 +26,7 @@ class Search extends React.Component {
     this.setState({ isLoading: false });
 
     if (books && !books.error) {
-      this.setState({ books, query });
+      this.setState({ books });
     }
   };
 
@@ -39,7 +39,7 @@ class Search extends React.Component {
       this.debounced();
     } else {
       this.debounced.cancel();
-      this.setState({ books: [], query: "", isLoading: false });
+      this.setState({ books: [], isLoading: false });
     }
   };
 
@@ -65,16 +65,17 @@ class Search extends React.Component {
     return <Spinner name="three-bounce" fadeIn="half" style={spinnerStyle} />;
   };
 
+  back = () => {
+    this.props.history.push("/");
+  };
+
   render() {
     let { books, isLoading } = this.state;
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <a
-            className="close-search"
-            onClick={() => this.props.history.push("/")}
-          >
+          <a className="close-search" onClick={this.back}>
             Close
           </a>
           <div className="search-books-input-wrapper">
