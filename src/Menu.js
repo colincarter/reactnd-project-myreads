@@ -9,7 +9,7 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="book-shelf-changer">
-        <select defaultValue={this.props.shelfName} onChange={this.onChange}>
+        <select value={this.props.shelfName} onChange={this.onChange}>
           <option value="none" disabled>
             Move to...
           </option>

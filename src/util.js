@@ -7,6 +7,17 @@ export const rawBookToBook = rawBook => {
   };
 };
 
+const shelfNames = ["read", "wantToRead", "currentlyReading", "none"];
+
+export const findShelf = (bookToFind, props) => {
+  for (let shelf of shelfNames) {
+    if (props[shelf].find(book => book.id === bookToFind.id)) {
+      return shelf;
+    }
+  }
+  return null;
+};
+
 export const spinnerStyle = {
   position: "absolute",
   top: "50%",

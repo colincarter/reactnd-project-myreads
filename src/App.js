@@ -43,7 +43,11 @@ class BooksApp extends React.Component {
     <Home {...props} {...this.state} moveBookToShelf={this.moveBookToShelf} />;
 
   renderSearch = props =>
-    <Search {...props} moveBookToShelf={this.moveBookToShelf} />;
+    <Search
+      {...props}
+      {...this.state}
+      moveBookToShelf={this.moveBookToShelf}
+    />;
 
   render() {
     return (
