@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import Spinner from "react-spinkit";
-import { spinnerStyle } from "./util";
+import { spinnerStyle, rawBookToBook } from "./util";
 import * as BooksAPI from "./BooksAPI";
-import { rawBookToBook } from "./util";
 import Book from "./Book";
 
 class Search extends React.Component {
