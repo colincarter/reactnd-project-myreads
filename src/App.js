@@ -4,14 +4,15 @@ import { getAll, update } from "./BooksAPI";
 import Search from "./Search";
 import Home from "./Home";
 import { rawBookToBook } from "./util";
+import { READ, WANT_TO_READ, CURRENTLY_READING, NONE } from "./util";
 import "./App.css";
 
 class BooksApp extends React.Component {
   state = {
-    read: [],
-    none: [],
-    wantToRead: [],
-    currentlyReading: [],
+    [READ]: [],
+    [NONE]: [],
+    [WANT_TO_READ]: [],
+    [CURRENTLY_READING]: [],
     isLoading: false
   };
 
@@ -20,7 +21,7 @@ class BooksApp extends React.Component {
     const books = await getAll();
 
     books.forEach(book => {
-      this.moveBookToShelf(rawBookToBook(book), "none", book.shelf);
+      this.moveBookToShelf(rawBookToBook(book), NONE, book.shelf);
     });
   };
 

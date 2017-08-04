@@ -7,7 +7,12 @@ export const rawBookToBook = rawBook => {
   };
 };
 
-const shelfNames = ["read", "wantToRead", "currentlyReading", "none"];
+export const READ = "read";
+export const WANT_TO_READ = "wantToRead";
+export const CURRENTLY_READING = "currentlyReading";
+export const NONE = "none";
+
+const shelfNames = [READ, WANT_TO_READ, CURRENTLY_READING, NONE];
 
 export const findShelf = (bookToFind, props) => {
   for (let shelf of shelfNames) {
