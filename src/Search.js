@@ -14,15 +14,20 @@ class Search extends React.Component {
     this.searchInput.focus();
   };
 
+  shouldComponentUpdate = (nextProps, nextState) => {
+    // Don't update the display if there isn't a search term present but there
+    // are books to display.  This occurs when the search field is rapidly
+    // cleared and there are api requests still pending.
+    return !(this.searchInput.value === "" && nextState.books.length > 0);
+  };
+
   queryAPI = async query => {
     const books = await BooksAPI.search(query);
 
     this.setState({ isLoading: false });
 
     if (books && !books.error) {
-      if (this.searchInput.value !== "") {
-        this.setState({ books, query });
-      }
+      this.setState({ books, query });
     }
   };
 
