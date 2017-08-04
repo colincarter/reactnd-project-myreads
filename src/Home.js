@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Spinner from "react-spinkit";
 import { spinnerStyle } from "./util";
 import Bookshelf from "./Bookshelf";
+import { READ, WANT_TO_READ, CURRENTLY_READING } from "./util";
 
 class Home extends React.Component {
   search = () => {
@@ -22,19 +23,19 @@ class Home extends React.Component {
       <div>
         <Bookshelf
           title="Currently Reading"
-          shelfName="currentlyReading"
+          shelfName={CURRENTLY_READING}
           books={currentlyReading}
           moveBookToShelf={moveBookToShelf}
         />
         <Bookshelf
           title="Read"
-          shelfName="read"
+          shelfName={READ}
           books={read}
           moveBookToShelf={moveBookToShelf}
         />
         <Bookshelf
           title="Want to Read"
-          shelfName="wantToRead"
+          shelfName={WANT_TO_READ}
           books={wantToRead}
           moveBookToShelf={moveBookToShelf}
         />

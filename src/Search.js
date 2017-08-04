@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import Spinner from "react-spinkit";
-import { spinnerStyle, rawBookToBook } from "./util";
+import { spinnerStyle, rawBookToBook, findShelf } from "./util";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 
@@ -49,13 +49,14 @@ class Search extends React.Component {
 
   renderBook = (rawBook, index) => {
     const book = rawBookToBook(rawBook);
+    const shelf = findShelf(book, this.props);
 
     return (
       <li key={index}>
         <Book
           book={book}
           moveBookToShelf={this.moveBookToShelf}
-          shelfName={rawBook.shelf}
+          shelfName={shelf || rawBook.shelf}
         />
       </li>
     );
@@ -88,11 +89,11 @@ class Search extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          {isLoading && this.renderSpinner()}
-
-          <ol className="books-grid">
-            {books.map((book, index) => this.renderBook(book, index))}
-          </ol>
+          {isLoading
+            ? this.renderSpinner()
+            : <ol className="books-grid">
+                {books.map((book, index) => this.renderBook(book, index))}
+              </ol>}
         </div>
       </div>
     );
