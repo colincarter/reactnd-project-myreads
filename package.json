@@ -9,6 +9,7 @@
     "react-spinkit": "^3.0.0"
   },
   "devDependencies": {
+    "mock-local-storage": "^1.0.4",
     "react-scripts": "1.0.10"
   },
   "scripts": {
