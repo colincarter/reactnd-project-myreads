@@ -5,7 +5,7 @@ import fetch from "isomorphic-fetch";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-it("renders without crashing", () => {
+it("renders without crashing", done => {
   const div = document.createElement("div");
   ReactDOM.render(
     <BrowserRouter>
@@ -13,4 +13,7 @@ it("renders without crashing", () => {
     </BrowserRouter>,
     div
   );
+  setTimeout(() => {
+    done();
+  }, 50);
 });
