@@ -1,14 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import localStorage from "mock-local-storage";
+import fetch from "isomorphic-fetch";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-/** 
- This course is not designed to teach Test Driven Development. 
- Feel free to use this file to test your application, but it 
- is not required.
-**/
+function delay(ms) {
+  return new Promise(resolve => {
+    window.setTimeout(resolve, ms);
+  });
+}
 
-it("renders without crashing", () => {
+it("renders without crashing", async done => {
   const div = document.createElement("div");
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+    div
+  );
+  await delay(3000).then(done);
 });
