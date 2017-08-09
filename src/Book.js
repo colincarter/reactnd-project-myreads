@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import Menu from "./Menu";
 
 class Book extends React.Component {
+  /**
+   * Moves a book to another shelf by delegating to the parent component.
+   */
   moveBook = (fromShelf, toShelf) => {
     if (fromShelf !== toShelf) {
       this.props.moveBookToShelf(this.props.book, fromShelf, toShelf);

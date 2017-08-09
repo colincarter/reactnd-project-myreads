@@ -7,8 +7,14 @@ import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 
 class Search extends React.Component {
+  /**
+   * Some local state to this component for managing the search result
+   */
   state = { books: [], isLoading: false };
 
+  /**
+   * Ensure the input field is focused ready for text input
+   */
   componentDidMount = () => {
     this.searchInput.focus();
   };
@@ -20,6 +26,10 @@ class Search extends React.Component {
     return !(this.searchInput.value === "" && nextState.books.length > 0);
   };
 
+  /**
+   * Query the API based on the query parameter
+   * @param {string} query - the query term
+   */
   queryAPI = async query => {
     const books = await BooksAPI.search(query);
 
@@ -30,6 +40,11 @@ class Search extends React.Component {
     }
   };
 
+  /**
+   * onChange is called on every change in the search query field. It prevents 
+   * hammering the API by using the debounce function which only calls the
+   * API 150 milliseconds after it was last called.
+   */
   onChange = event => {
     const query = event.target.value;
 
@@ -43,6 +58,9 @@ class Search extends React.Component {
     }
   };
 
+  /**
+   * Moves a book to a shelf by delegating to the parent component
+   */
   moveBookToShelf = (book, fromShelf, toShelf) => {
     this.props.moveBookToShelf(book, fromShelf, toShelf);
   };

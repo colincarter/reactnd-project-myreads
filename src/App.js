@@ -16,6 +16,10 @@ class BooksApp extends React.Component {
     isLoading: false
   };
 
+  /**
+   * Loads current state of the bookshelf when this component
+   * is mounted.
+   */
   componentDidMount = async () => {
     this.setState({ isLoading: true });
     const books = await getAll();
@@ -25,6 +29,14 @@ class BooksApp extends React.Component {
     });
   };
 
+  /**
+   * Moves a book from one bookshelf to another.  This function also updates the
+   * API with the bookshelf the book has moved to.
+   * 
+   * @param {object} book - The book object to move
+   * @param {string} from - the bookshelf to move from
+   * @param {string} to - the bookshelf to move to
+   */
   moveBookToShelf = (book, from, to) => {
     this.setState(
       state => {

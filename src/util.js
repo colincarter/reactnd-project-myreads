@@ -1,3 +1,7 @@
+/**
+ * Convert a rawbook from the api to a smaller/flatter book object
+ * @param {object} rawBook 
+ */
 export const rawBookToBook = rawBook => {
   return {
     id: rawBook.id,
@@ -14,6 +18,12 @@ export const NONE = "none";
 
 const shelfNames = [READ, WANT_TO_READ, CURRENTLY_READING, NONE];
 
+/**
+ * Find the shelf a book resides in.
+ * @param {object} bookToFind 
+ * @param {object} props 
+ * @returns {object} shelfName or null if the book is not in a shelf
+ */
 export const findShelf = (bookToFind, props) => {
   for (let shelf of shelfNames) {
     if (props[shelf].find(book => book.id === bookToFind.id)) {
