@@ -10,12 +10,14 @@
   },
   "devDependencies": {
     "mock-local-storage": "^1.0.4",
+    "prettier": "^1.5.3",
     "react-scripts": "1.0.10"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettify": "prettier --write src/**/*.js"
   }
 }
