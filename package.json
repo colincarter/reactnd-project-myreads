@@ -2,8 +2,12 @@
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
     "lodash": "^4.17.4",
+    "preact": "^8.2.4",
+    "preact-compat": "^3.17.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-app-rewire-preact": "^1.0.1",
+    "react-app-rewired": "^1.2.2",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
     "react-spinkit": "^3.0.0"
@@ -14,8 +18,8 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "prettify": "prettier --write src/**/*.js"
